@@ -1,4 +1,7 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -11,6 +14,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -27,7 +31,7 @@ export function Navbar() {
     >
       <nav className="mx-auto max-w-[1600px] px-5 lg:px-8 h-16 flex items-center justify-between">
         <Link
-          to="/"
+          href="/"
           className="font-display font-extrabold text-base tracking-tight hover:opacity-70 transition-opacity"
         >
           KRAFTIFY<span className="text-gold">.</span>
@@ -37,15 +41,16 @@ export function Navbar() {
           {links.map((l) => (
             <Link
               key={l.to}
-              to={l.to}
-              className="px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-foreground/70 hover:text-foreground transition-colors"
-              activeProps={{ className: "text-foreground" }}
+              href={l.to}
+              className={`px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] transition-colors ${
+                pathname === l.to ? "text-foreground" : "text-foreground/70 hover:text-foreground"
+              }`}
             >
               {l.label}
             </Link>
           ))}
           <Link
-            to="/book"
+            href="/book"
             className="ml-4 inline-flex items-center gap-2 bg-foreground text-primary-foreground px-5 py-2.5 text-xs font-medium uppercase tracking-[0.14em] hover:bg-gold hover:text-primary-foreground transition-colors"
           >
             Book Now
@@ -67,7 +72,7 @@ export function Navbar() {
             {links.map((l) => (
               <Link
                 key={l.to}
-                to={l.to}
+                href={l.to}
                 onClick={() => setOpen(false)}
                 className="text-sm uppercase tracking-[0.14em] py-2 text-foreground/80 hover:text-foreground"
               >
@@ -75,7 +80,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              to="/book"
+              href="/book"
               onClick={() => setOpen(false)}
               className="mt-2 bg-foreground text-primary-foreground px-5 py-3 text-xs uppercase tracking-[0.14em] text-center"
             >

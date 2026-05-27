@@ -9,16 +9,9 @@ lerna-debug.log*
 
 node_modules
 dist
-dist-ssr
-.output
-.vinxi
-.tanstack/**
-.nitro
+.next/
+out/
 *.local
-
-# Wrangler / Cloudflare
-.wrangler/
-.dev.vars
 
 # Editor directories and files
 .vscode/*
@@ -30,3 +23,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original media files — use converted web versions only
+*.mov
+*.avi
+*.mkv
+*.heic
+
+# Environment
+.env.local
